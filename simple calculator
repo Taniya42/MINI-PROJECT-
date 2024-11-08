@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <stdlib.h>
+ 
+// Function prototypes
+void displayMenu();
+void performOperation(char operation, double num1, double num2);
+ 
+int main() {
+    char operation;
+    double num1, num2;
+    int keepRunning = 1;
+ 
+    printf("Welcome to the Command-Line Calculator!\n");
+ 
+    while (keepRunning) {
+        // Display the available operations
+        displayMenu();
+ 
+        printf("Choose an operation (+, -, *, /) or 'q' to quit: ");
+        scanf(" %c", &operation);
+ 
+        // Check if the user wants to quit
+        if (operation == 'q') {
+            printf("Exiting calculator. Goodbye!\n");
+            keepRunning = 0;
+            continue;
+        }
+ 
+        // Get two numbers from the user
+        printf("Enter the first number: ");
+        scanf("%lf", &num1);
+        printf("Enter the second number: ");
+        scanf("%lf", &num2);
+ 
+        // Perform the selected operation
+        performOperation(operation, num1, num2);
+    }
+ 
+    return 0;
+}
+ 
+// Function to display the menu
+void displayMenu() {
+    printf("\n===== Calculator Menu =====\n");
+    printf("Addition (+)\n");
+    printf("Subtraction (-)\n");
+    printf("Multiplication (*)\n");
+    printf("Division (/)\n");
+    printf("Quit (q)\n");
+    printf("===========================\n");
+}
+ 
+// Function to perform the chosen arithmetic operation
+void performOperation(char operation, double num1, double num2) {
+    double result;
+ 
+    switch (operation) {
+        case '+':
+            result = num1 + num2;
+            printf("Result: %.2lf + %.2lf = %.2lf\n", num1, num2, result);
+            break;
+        case '-':
+            result = num1 - num2;
+            printf("Result: %.2lf - %.2lf = %.2lf\n", num1, num2, result);
+            break;
+        case '*':
+            result = num1 * num2;
+            printf("Result: %.2lf * %.2lf = %.2lf\n", num1, num2, result);
+            break;
+        case '/':
+            if (num2 != 0) {
+                result = num1 / num2;
+                printf("Result: %.2lf / %.2lf = %.2lf\n", num1, num2, result);
+            } else {
+                printf("Error: Division by zero is undefined.\n");
+            }
+            break;
+        default:
+            printf("Invalid operation. Please choose +, -, *, or /.\n");
+            break;
+    }
+}
